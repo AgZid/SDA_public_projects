@@ -41,5 +41,4 @@ public class GasStationMain {
     private static double calculatePrice(double price, double amount) {
         return price * amount;
     }
-
 }
