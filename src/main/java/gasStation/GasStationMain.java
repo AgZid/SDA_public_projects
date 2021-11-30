@@ -9,20 +9,18 @@ public class GasStationMain {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Gas> gasArrayList = new ArrayList<>();
 
-        Gas gas95 = new Gas("Benzinas 95", 1.50);
-        Gas gas98 = new Gas("Benzinas 98", 1.70);
-        Gas gasDyzelis = new Gas("Dyzelis", 1.30);
-
-        gasArrayList.add(gas95);
-        gasArrayList.add(gas98);
-        gasArrayList.add(gasDyzelis);
+        gasArrayList.add(new Gas("Benzinas 95", 1.50));
+        gasArrayList.add(new Gas("Benzinas 98", 1.70));
+        gasArrayList.add(new Gas("Dyzelis", 1.30));
 
         int userInput = 0;
 
         while (userInput < 1 || userInput > 3) {
-            System.out.println(String.format("Sveiki, pasirinkite dagalų tipą; \n 1 - %s %f EUR, \n 2 - %s %f EUR , " +
-                            "\n 3 - %s %f EUR",gas95.getType(), gas95.getPrice(), gas98.getType(),  gas98.getPrice(),
-                    gasDyzelis.getType(), gasDyzelis.getPrice()));
+            System.out.println(String.format("Sveiki, pasirinkite dagalų tipą; \n 1 - %s kaina %f EUR, \n 2 - %s kaina %f EUR , \n 3 - %s kaina %f EUR\n",
+                    gasArrayList.get(0).getType(), gasArrayList.get(0).getPrice(),
+                    gasArrayList.get(1).getType(), gasArrayList.get(1).getPrice(),
+                    gasArrayList.get(2).getType(), gasArrayList.get(2).getPrice()));
+
             userInput = scanner.nextInt();
             if (userInput < 1 && userInput > 3) {
                 System.out.println("Neteisingas pasirinkimas");
@@ -34,11 +32,10 @@ public class GasStationMain {
         System.out.println("Įveskite kuro kiekį:");
         double gasAmuont = scanner.nextDouble();
 
-        double price = calculatePrice(gasArrayList.get(userInput - 1).getPrice(),gasAmuont );
         System.out.println("Čekis:");
         System.out.println("Kolonėlė " + gasColonNumber);
         System.out.println("Kuras " + gasArrayList.get(userInput - 1).getType());
-        System.out.println("Kaina " + price);
+        System.out.println("Kaina " + calculatePrice(gasArrayList.get(userInput - 1).getPrice(), gasAmuont));
 
     }
 
