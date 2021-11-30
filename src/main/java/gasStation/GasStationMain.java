@@ -36,7 +36,6 @@ public class GasStationMain {
         System.out.println("Kolonėlė " + gasColonNumber);
         System.out.println("Kuras " + gasArrayList.get(userInput - 1).getType());
         System.out.println("Kaina " + calculatePrice(gasArrayList.get(userInput - 1).getPrice(), gasAmuont));
-
     }
 
     private static double calculatePrice(double price, double amount) {
