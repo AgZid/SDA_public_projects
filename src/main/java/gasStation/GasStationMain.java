@@ -22,7 +22,7 @@ public class GasStationMain {
                     gasArrayList.get(2).getType(), gasArrayList.get(2).getPrice()));
 
             userInput = scanner.nextInt();
-            if (userInput < 1 && userInput > 3) {
+            if (userInput < 1 || userInput > 3) {
                 System.out.println("Neteisingas pasirinkimas");
             }
         }
@@ -35,7 +35,7 @@ public class GasStationMain {
         System.out.println("Čekis:");
         System.out.println("Kolonėlė " + gasColonNumber);
         System.out.println("Kuras " + gasArrayList.get(userInput - 1).getType());
-        System.out.println("Kaina " + calculatePrice(gasArrayList.get(userInput - 1).getPrice(), gasAmuont));
+        System.out.println("Suma " + calculatePrice(gasArrayList.get(userInput - 1).getPrice(), gasAmuont) + " EUR");
     }
 
     private static double calculatePrice(double price, double amount) {
