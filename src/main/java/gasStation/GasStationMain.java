@@ -16,10 +16,15 @@ public class GasStationMain {
         int userInput = 0;
 
         while (userInput < 1 || userInput > 3) {
-            System.out.println(String.format("Sveiki, pasirinkite dagalų tipą; \n 1 - %s kaina %f EUR, \n 2 - %s kaina %f EUR , \n 3 - %s kaina %f EUR\n",
-                    gasArrayList.get(0).getType(), gasArrayList.get(0).getPrice(),
-                    gasArrayList.get(1).getType(), gasArrayList.get(1).getPrice(),
-                    gasArrayList.get(2).getType(), gasArrayList.get(2).getPrice()));
+//            System.out.println(String.format("Sveiki, pasirinkite dagalų tipą; \n 1 - %s kaina %f EUR, \n 2 - %s kaina %f EUR , \n 3 - %s kaina %f EUR\n",
+//                    gasArrayList.get(0).getType(), gasArrayList.get(0).getPrice(),
+//                    gasArrayList.get(1).getType(), gasArrayList.get(1).getPrice(),
+//                    gasArrayList.get(2).getType(), gasArrayList.get(2).getPrice()));
+
+            System.out.println("Sveiki, pasirinkite dagalų tipą");
+            for (Gas gas : gasArrayList) {
+                System.out.println("Tipas: " + gas.getType() + " kaina: " + gas.getPrice());
+            }
 
             userInput = scanner.nextInt();
             if (userInput < 1 || userInput > 3) {
