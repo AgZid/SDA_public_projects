@@ -9,19 +9,16 @@ public class Gas {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public Gas(Gas gas) {
+
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getType() {
+        return type;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }
