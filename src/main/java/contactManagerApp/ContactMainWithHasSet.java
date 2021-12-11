@@ -50,7 +50,7 @@ public class ContactMainWithHasSet {
         } else if (userSelectedOption == '5') {
             System.out.println("Enter full name:");
             for (Contact foundContact : contactServiceWithHashSet.searchContact(scanner.nextLine())) {
-                contactServiceWithHashSet.removeContact(foundContact);
+                contactServiceWithHashSet.removeContact(foundContact.getName(), ContactServiceWithHashSet.myContacts);
             }
             contactServiceWithHashSet.showContactsList();
         } else if (userSelectedOption == 'E'){

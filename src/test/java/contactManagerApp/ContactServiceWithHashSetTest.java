@@ -1,9 +1,11 @@
 package contactManagerApp;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,12 +15,17 @@ class ContactServiceWithHashSetTest {
     static HashSet<Contact> contactHashSet = new HashSet<>();
 
     @BeforeAll
-    static void createContacts() {
-        contactHashSet.add(new Contact("Petras","pertas@imone.lt","+37067777777"));
-        contactHashSet.add(new Contact("Jonas","jonas@imone.lt","+37067777788"));
-        contactHashSet.add(new Contact("Jonas Jonaitis","jonas.j@imone.lt","37067779999"));
-
+    static void setUp() {
         contactServiceWithHashSet = new ContactServiceWithHashSet(contactHashSet);
+    }
+
+    @BeforeEach
+    void createContacts() {
+        ContactServiceWithHashSet.myContacts = new HashSet<>();
+
+        ContactServiceWithHashSet.myContacts.add(new Contact("Petras","pertas@imone.lt","+37067777777"));
+        ContactServiceWithHashSet.myContacts.add(new Contact("Jonas","jonas@imone.lt","+37067777788"));
+        ContactServiceWithHashSet.myContacts.add(new Contact("Jonas Jonaitis","jonas.j@imone.lt","37067779999"));
     }
 
     @Test
@@ -26,11 +33,22 @@ class ContactServiceWithHashSetTest {
         Contact newContact = new Contact("Ona", "onyte@imone.lt","+37067777799");
 
         assertThat(contactServiceWithHashSet.addContact(newContact)).isTrue();
+        assertThat(contactHashSet.size()).isEqualTo(4);
     }
 
     @Test
     void testSearchContact_foundContact() {
-        assertThat(contactServiceWithHashSet.searchContact("jonas").size()).isEqualTo(1);
+        Set<Contact> foundContacts = contactServiceWithHashSet.searchContact("jonas");
+        Contact jonas = null;
+
+        for (Contact foundContact : foundContacts) {
+            jonas = foundContact;
+        }
+        assertThat(foundContacts.size()).isEqualTo(1);
+        assertThat(jonas.getName()).isEqualTo("Jonas");
+        assertThat(jonas.getEmail()).isEqualTo("jonas@imone.lt");
+        assertThat(jonas.getPhoneNumber()).isEqualTo("+37067777788");
+
     }
 
     @Test
@@ -50,9 +68,8 @@ class ContactServiceWithHashSetTest {
 
     @Test
     void testRemoveContact() {
-        Contact newContact = new Contact("Jonas","jonas@imone.lt","+37067777788");
-
-        assertThat(contactServiceWithHashSet.removeContact(newContact)).isTrue();
+        assertThat(contactServiceWithHashSet.removeContact("petras", ContactServiceWithHashSet.myContacts)).isTrue();
+        assertThat(ContactServiceWithHashSet.myContacts.size()).isEqualTo(2);
     }
 
     @Test

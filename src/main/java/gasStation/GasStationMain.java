@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class GasStationMain {

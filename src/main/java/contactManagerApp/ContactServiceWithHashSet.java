@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ public class ContactServiceWithHashSet {
 
     private static final Logger LOGGER = Logger.getLogger(ContactServiceWithHashSet.class);
 
-    static HashSet<Contact> myContacts = new HashSet<>();
+    public static HashSet<Contact> myContacts = new HashSet<>();
 
     public ContactServiceWithHashSet() {
     }
@@ -71,7 +72,7 @@ public class ContactServiceWithHashSet {
     }
 
     public HashSet<Contact> getContactsByGivenString(String givenString) {
-        LOGGER.info("Searching contact by name part" + givenString);
+        LOGGER.info("Searching contact by name part " + givenString);
         HashSet<Contact> foundContacts= new HashSet<>();
 
         for (Contact contact : myContacts) {
@@ -83,11 +84,19 @@ public class ContactServiceWithHashSet {
         return foundContacts;
     }
 
-    public boolean removeContact(Contact contactToRemove) {
-        LOGGER.info("Removing contact " + contactToRemove);
-        myContacts.remove(contactToRemove);
-        System.out.println("Contact " + contactToRemove + " was removed");
-        return !myContacts.contains(contactToRemove);
+    public boolean removeContact(String contactNameToRemove, Set<Contact> contacts) {
+        LOGGER.info("Removing contact " + contactNameToRemove);
+        boolean isContactRemoved = false;
+        for (Contact myContact : contacts) {
+            if (contactNameToRemove.equalsIgnoreCase(myContact.getName())) {
+                contacts.remove(myContact);
+                isContactRemoved = true;
+                break;
+            }
+        }
+
+        System.out.println("Contact " + contactNameToRemove + " was removed");
+        return isContactRemoved;
     }
 
     public boolean isNotPhoneNumber(String phone) {
