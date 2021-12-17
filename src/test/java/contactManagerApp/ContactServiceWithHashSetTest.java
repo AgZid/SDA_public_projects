@@ -12,20 +12,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ContactServiceWithHashSetTest {
 
     static ContactServiceWithHashSet contactServiceWithHashSet;
-    static HashSet<Contact> contactHashSet = new HashSet<>();
+    static HashSet<Contact> contactHashSet;
 
     @BeforeAll
     static void setUp() {
-        contactServiceWithHashSet = new ContactServiceWithHashSet(contactHashSet);
+
     }
 
     @BeforeEach
     void createContacts() {
-        ContactServiceWithHashSet.myContacts = new HashSet<>();
+        HashSet<Contact> contactHashSet = new HashSet<>();
 
-        ContactServiceWithHashSet.myContacts.add(new Contact("Petras","pertas@imone.lt","+37067777777"));
-        ContactServiceWithHashSet.myContacts.add(new Contact("Jonas","jonas@imone.lt","+37067777788"));
-        ContactServiceWithHashSet.myContacts.add(new Contact("Jonas Jonaitis","jonas.j@imone.lt","37067779999"));
+        contactHashSet.add(new Contact("Petras","pertas@imone.lt","+37067777777"));
+        contactHashSet.add(new Contact("Jonas","jonas@imone.lt","+37067777788"));
+        contactHashSet.add(new Contact("Jonas Jonaitis","jonas.j@imone.lt","37067779999"));
+
+        contactServiceWithHashSet = new ContactServiceWithHashSet(contactHashSet);
     }
 
     @Test
@@ -33,7 +35,7 @@ class ContactServiceWithHashSetTest {
         Contact newContact = new Contact("Ona", "onyte@imone.lt","+37067777799");
 
         assertThat(contactServiceWithHashSet.addContact(newContact)).isTrue();
-        assertThat(contactHashSet.size()).isEqualTo(4);
+        assertThat(contactServiceWithHashSet.getMyContacts().size()).isEqualTo(4);
     }
 
     @Test
@@ -48,7 +50,6 @@ class ContactServiceWithHashSetTest {
         assertThat(jonas.getName()).isEqualTo("Jonas");
         assertThat(jonas.getEmail()).isEqualTo("jonas@imone.lt");
         assertThat(jonas.getPhoneNumber()).isEqualTo("+37067777788");
-
     }
 
     @Test
@@ -68,8 +69,8 @@ class ContactServiceWithHashSetTest {
 
     @Test
     void testRemoveContact() {
-        assertThat(contactServiceWithHashSet.removeContact("petras", ContactServiceWithHashSet.myContacts)).isTrue();
-        assertThat(ContactServiceWithHashSet.myContacts.size()).isEqualTo(2);
+        assertThat(contactServiceWithHashSet.removeContact("petras")).isTrue();
+        assertThat(contactServiceWithHashSet.getMyContacts().size()).isEqualTo(2);
     }
 
     @Test

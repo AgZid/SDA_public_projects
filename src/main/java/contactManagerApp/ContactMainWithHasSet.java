@@ -11,6 +11,7 @@ public class ContactMainWithHasSet {
     ContactServiceWithHashSet contactServiceWithHashSet = new ContactServiceWithHashSet();
 
     public static void main(String[] args) throws IOException {
+
         new ContactMainWithHasSet().showMenu();
 
     }
@@ -19,7 +20,7 @@ public class ContactMainWithHasSet {
         System.out.println("Welcome to Contact management application");
         char userSelectedOption;
 
-        ContactServiceWithHashSet.collectContacts();
+        contactServiceWithHashSet.collectContacts();
 
         do {
             System.out.println();
@@ -49,9 +50,8 @@ public class ContactMainWithHasSet {
             contactServiceWithHashSet.showContactsList();
         } else if (userSelectedOption == '5') {
             System.out.println("Enter full name:");
-            for (Contact foundContact : contactServiceWithHashSet.searchContact(scanner.nextLine())) {
-                contactServiceWithHashSet.removeContact(foundContact.getName(), ContactServiceWithHashSet.myContacts);
-            }
+            contactServiceWithHashSet.removeContact(scanner.nextLine());
+
             contactServiceWithHashSet.showContactsList();
         } else if (userSelectedOption == 'E'){
             System.out.println("Exiting application...");

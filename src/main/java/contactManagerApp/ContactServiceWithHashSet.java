@@ -1,12 +1,11 @@
 package contactManagerApp;
 
-
 import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +14,7 @@ public class ContactServiceWithHashSet {
 
     private static final Logger LOGGER = Logger.getLogger(ContactServiceWithHashSet.class);
 
-    public static HashSet<Contact> myContacts = new HashSet<>();
+    private HashSet<Contact> myContacts = new HashSet<>();
 
     public ContactServiceWithHashSet() {
     }
@@ -24,7 +23,15 @@ public class ContactServiceWithHashSet {
         this.myContacts = myContacts;
     }
 
-    public static void collectContacts() throws IOException {
+    public HashSet<Contact> getMyContacts() {
+        return myContacts;
+    }
+
+    public void setMyContacts(HashSet<Contact> myContacts) {
+        this.myContacts = myContacts;
+    }
+
+    public void collectContacts() throws IOException {
         FileReader contactFile = new FileReader(CONTACT_LIST);
 
         try(BufferedReader bufferedReader = new BufferedReader(contactFile)) {
@@ -41,7 +48,7 @@ public class ContactServiceWithHashSet {
         }
     }
 
-    public static void showContactsList() {
+    public void showContactsList() {
         System.out.println("[< MY CONTACTS>]");
         for (Contact myContact : myContacts) {
             if(myContact != null) {
@@ -84,14 +91,17 @@ public class ContactServiceWithHashSet {
         return foundContacts;
     }
 
-    public boolean removeContact(String contactNameToRemove, Set<Contact> contacts) {
+    public boolean removeContact(String contactNameToRemove) {
         LOGGER.info("Removing contact " + contactNameToRemove);
+
         boolean isContactRemoved = false;
-        for (Contact myContact : contacts) {
-            if (contactNameToRemove.equalsIgnoreCase(myContact.getName())) {
-                contacts.remove(myContact);
+        Iterator<Contact> iterator = myContacts.iterator();
+
+        while (iterator.hasNext()) {
+            Contact nextContact = iterator.next();
+            if (contactNameToRemove.equalsIgnoreCase(nextContact.getName())) {
+                iterator.remove();
                 isContactRemoved = true;
-                break;
             }
         }
 
