@@ -5,14 +5,25 @@ import java.util.*;
 public class ProductServices {
     public void addProduct(DaysOfTheWeek daysOfTheWeek, Product product, Map<DaysOfTheWeek, Set<Product>> productList) {
         Set<Product> listTobeAdded =  productList.get(daysOfTheWeek);
+        boolean isProductInTheList = false;
 
-        if (listTobeAdded == null) {
-            listTobeAdded = new HashSet<>();
-            productList.put(daysOfTheWeek, listTobeAdded);
+        for (Product productFromList : listTobeAdded) {
+            if (productFromList.getName().equalsIgnoreCase(product.getName())) {
+                System.out.println("Product already exits");
+                System.out.println("New product " + product + " was not added for " + daysOfTheWeek);
+                isProductInTheList = true;
+            }
         }
-        listTobeAdded.add(product);
 
-        System.out.println("New product " + product + " was added for " + daysOfTheWeek);
+        if (isProductInTheList = false) {
+            if (listTobeAdded == null) {
+                listTobeAdded = new HashSet<>();
+                productList.put(daysOfTheWeek, listTobeAdded);
+            }
+            listTobeAdded.add(product);
+
+            System.out.println("New product " + product + " was added for " + daysOfTheWeek);
+        }
     }
 
     public void showProductList(Map<DaysOfTheWeek, Set<Product>> productList) {
