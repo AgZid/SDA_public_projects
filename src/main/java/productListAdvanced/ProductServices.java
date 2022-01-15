@@ -15,7 +15,7 @@ public class ProductServices {
             }
         }
 
-        if (isProductInTheList = false) {
+        if (!isProductInTheList) {
             if (listTobeAdded == null) {
                 listTobeAdded = new HashSet<>();
                 productList.put(daysOfTheWeek, listTobeAdded);
@@ -46,7 +46,7 @@ public class ProductServices {
 
         if (listOfProducts.isEmpty()) {
             productList.remove(day);
-        };
+        }
     }
 
 }
