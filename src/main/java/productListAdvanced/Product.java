@@ -24,20 +24,12 @@ public class Product {
         }
     }
 
-    public double getPrice() {
-        return price;
-    }
-
     public void setPrice(double price) {
         if (price > 0) {
             this.price = price;
         } else {
             System.out.println("Price cannot by lower than 0");
         }
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public void setQuantity(int quantity) {
