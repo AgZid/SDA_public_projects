@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ContactServiceWithHashSetTest {
 
     static ContactServiceWithHashSet contactServiceWithHashSet;
-    static HashSet<Contact> contactHashSet;
 
     @BeforeAll
     static void setUp() {
